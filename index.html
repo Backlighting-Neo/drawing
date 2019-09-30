@@ -4,15 +4,15 @@
     <style type="text/css">
       #canvas {
         padding: 20px;
-        width: 800px;
-        height: 800px;
+        /* width: 800px;
+        height: 800px; */
         /* border: 1px solid grey; */
       }
     </style>
   </header>
 
   <body>
-    <canvas id="canvas" width="9000" height="9000"></canvas>
+    <canvas id="canvas" width="900" height="900"></canvas>
 
     <script>
       const canvas = document.getElementById('canvas');
@@ -21,11 +21,11 @@
       const currentPoint = [0, 0];
       function moveTo() {
         console.log('moveTo', currentPoint[0], currentPoint[1]);
-        ctx.moveTo(currentPoint[0], currentPoint[1]);
+        ctx.moveTo(currentPoint[0] / 10, currentPoint[1] / 10);
       }
       function lineTo() {
         console.log('lineTo', currentPoint[0], currentPoint[1]);
-        ctx.lineTo(currentPoint[0], currentPoint[1]);
+        ctx.lineTo(currentPoint[0] / 10, currentPoint[1] / 10);
       }
       function moveRight(distance) {
         currentPoint[0] += distance;
@@ -60,12 +60,13 @@
         lineTo();
       }
 
-      ctx.lineWidth = 20;
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = '#0000ff';
 
       const offset = 800;
 
       moveRight(offset, 'Init');
-      moveRight(504, '厨房烟道南侧');
+      moveRight(423, '厨房烟道西侧');
       lineRight(2167, '厨房东墙');
       lineDown(2280, '厨房南墙');
       lineLeft(963, '厨房西墙南侧');
@@ -88,7 +89,44 @@
       lineUp(705, '客厅西侧垛子宽度');
       lineLeft(230, '客厅垛子厚度');
       lineDown(705, '客厅西侧垛子宽度');
-      
+      lineLeft(3691, '客厅西墙');
+      lineDown(150, '客厅与主卧墙厚');
+      lineRight(988, '方庭东墙');
+      lineDown(150, '主卧门框东侧');
+      lineRight(150,'主卧门框东侧');
+      lineUp(150, '主卧门框东侧');
+      lineRight(3272, '主卧东墙');
+      lineDown(3081, '主卧南墙');
+      lineLeft(3272, '主卧西墙');
+      lineUp(2172, '主卧北墙');
+      lineLeft(150, '主卧门框西侧');
+      lineDown(60, '主卧门框西侧');
+      lineLeft(541, '方庭西墙南侧');
+      lineDown(150, '方庭与卫生间间墙厚');
+      lineRight(541, '卫生间东墙南侧');
+      lineDown(1971, '卫生间南墙');
+      lineLeft(1961, '卫生间西墙');
+      lineUp(1972, '卫生间北墙');
+      lineRight(656, '卫生间东墙北侧');
+      lineUp(150, '方庭与卫生间间墙厚');
+      lineLeft(646, '方庭西墙北侧');
+      lineUp(60, '次卧门框西侧');
+      lineLeft(150, '次卧门框西侧');
+      lineDown(2158, '次卧南墙');
+      lineLeft(2674, '次卧西墙');
+      lineUp(3077, '次卧北墙');
+      lineRight(2672, '次卧东墙');
+      lineDown(60, '次卧门框东侧');
+      lineRight(150, '次卧门框东侧');
+      lineUp(210, '次卧门框东侧');
+      lineLeft(2101, '餐厅西墙');
+      lineUp(3100, '餐厅北墙');
+      lineRight(842, '厨房西墙北侧');
+      lineUp(230, '厨房与餐厅间墙厚');
+      lineLeft(842, '厨房西墙北侧');
+      lineUp(1772, '厨房北墙');
+      lineRight(423, '厨房烟道西侧');
+      lineUp(504, '厨房烟道南侧');
 
       ctx.stroke();
     </script>
