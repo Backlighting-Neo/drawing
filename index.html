@@ -2,30 +2,46 @@
   <header>
     <title>Drawing</title>
     <style type="text/css">
-      #canvas {
+      body {
         padding: 20px;
-        /* width: 800px;
-        height: 800px; */
-        /* border: 1px solid grey; */
+      }
+
+      #canvas {
+        width: 900px;
+        height: 900px;
       }
     </style>
   </header>
 
   <body>
-    <canvas id="canvas" width="900" height="900"></canvas>
+    <canvas id="canvas"></canvas>
 
     <script>
       const canvas = document.getElementById('canvas');
+      const baseRatio = 9000 / canvas.offsetWidth;
+      const targetRatio = 2;
+      const pointRatio = baseRatio / targetRatio;
+      canvas.width = targetRatio * canvas.offsetWidth;
+      canvas.height = targetRatio * canvas.offsetHeight;
       const ctx = canvas.getContext('2d');
 
-      const currentPoint = [0, 0];
-      function moveTo() {
-        console.log('moveTo', currentPoint[0], currentPoint[1]);
-        ctx.moveTo(currentPoint[0] / 10, currentPoint[1] / 10);
+      function moveToFactory(callback) {
+        
       }
-      function lineTo() {
-        console.log('lineTo', currentPoint[0], currentPoint[1]);
-        ctx.lineTo(currentPoint[0] / 10, currentPoint[1] / 10);
+
+
+      const currentPoint = [0, 0];
+      function moveTo(x, y) {
+        x = x || currentPoint[0];
+        y = y || currentPoint[1];
+        console.log('moveTo', x, y);
+        ctx.moveTo(x / pointRatio, y / pointRatio);
+      }
+      function lineTo(x, y) {
+        x = x || currentPoint[0];
+        y = y || currentPoint[1];
+        console.log('lineTo', x, y);
+        ctx.lineTo(x / pointRatio, y / pointRatio);
       }
       function moveRight(distance) {
         currentPoint[0] += distance;
@@ -60,12 +76,22 @@
         lineTo();
       }
 
+      ctx.beginPath();
       ctx.lineWidth = 1;
-      ctx.strokeStyle = '#0000ff';
+      ctx.strokeStyle = '#d2d2d2';
+      for(let i = 0; i < 9000; i += 100) {
+        moveTo(i, 0);
+        lineTo(i, 9000);
+        moveTo(0, i);
+        lineTo(9000, i);
+      }
+      ctx.stroke();
 
-      const offset = 800;
-
-      moveRight(offset, 'Init');
+      ctx.beginPath();
+      ctx.strokeStyle = 'black';
+      ctx.lineWidth = 4;
+      moveRight(800, 'Init');
+      moveDown(100, 'Init');
       moveRight(423, '厨房烟道西侧');
       lineRight(2167, '厨房东墙');
       lineDown(2280, '厨房南墙');
@@ -127,7 +153,6 @@
       lineUp(1772, '厨房北墙');
       lineRight(423, '厨房烟道西侧');
       lineUp(504, '厨房烟道南侧');
-
       ctx.stroke();
     </script>
   </body>
